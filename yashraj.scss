@@ -17,7 +17,7 @@ $mainFontFamily: "myriad-pro-semi-condensed", Helvetica, Arial, sans-serif;
 
 body {
   margin: 0;
-  padding: 0 10px;
+  padding: 0 20px;
   background-color: #333;
   background-image: url("texturedbg.png");
   color: $mainTextColor;
@@ -50,7 +50,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .container {
-  padding: 20px;
+  padding: 10px 20px;
   margin: auto;
   background-color: $mainBgColor;
 }
