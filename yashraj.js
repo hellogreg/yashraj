@@ -189,6 +189,9 @@
         .append("title")
         .text(function(d) {
           return d.title;
+        })
+        .onmouseover(function(d) {
+          log("Movie: " + d.title);
         });
 
     svg.append("g")
