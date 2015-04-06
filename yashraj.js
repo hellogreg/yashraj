@@ -175,7 +175,6 @@
         .attr("class", "line")
         .attr("d", valueLine(data));
 
-
     svg.selectAll("dot")
         .data(data)
         .enter()
@@ -186,6 +185,10 @@
         })
         .attr("cy", function (d) {
           return y(d[chartKey]);
+        })
+        .append("title")
+        .text(function(d) {
+          return d.title;
         });
 
     svg.append("g")
