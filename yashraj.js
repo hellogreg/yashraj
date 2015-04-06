@@ -190,7 +190,7 @@
         .text(function(d) {
           return d.title;
         })
-        .onmouseover(function(d) {
+        .on("mouseover", function(d) {
           log("Movie: " + d.title);
         });
 
