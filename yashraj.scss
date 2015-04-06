@@ -33,13 +33,10 @@ section, article, header, footer, nav, aside, hgroup, div, form, svg {
   display: block;
 }
 
-h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote, fieldset, audio, video, applet, object, embed {
-  vertical-align: baseline;
-  padding: 0;
-}
-
 h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote, iframe, form, fieldset, audio, video, applet, object, embed, hr, svg {
   margin: 0 0 10px 0;
+  padding: 0;
+  vertical-align: baseline;
 }
 
 audio, video, applet, object, embed, iframe, img {
