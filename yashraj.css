@@ -23,9 +23,9 @@ section, article, header, footer, nav, aside, hgroup, div, form, svg {
 
 h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote, fieldset, audio, video, applet, object, embed {
   vertical-align: baseline;
-  padding: 10px 0; }
+  padding: 0; }
 
-p, ul, ol, blockquote, iframe, form, fieldset, audio, video, applet, object, embed, hr, svg {
+h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote, iframe, form, fieldset, audio, video, applet, object, embed, hr, svg {
   margin: 0 0 10px 0; }
 
 audio, video, applet, object, embed, iframe, img {
@@ -33,7 +33,6 @@ audio, video, applet, object, embed, iframe, img {
 
 h1, h2, h3, h4, h5, h6 {
   color: #7386b2;
-  margin: 0;
   padding: 0; }
 
 .container {
