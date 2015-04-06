@@ -179,7 +179,7 @@
         .data(data)
         .enter()
         .append("circle")
-        .attr("r", "2")
+        .attr("r", "3")
         .attr("cx", function (d) {
           return x(d.releaseDate);
         })
