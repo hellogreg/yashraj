@@ -7,6 +7,7 @@
 
 body {
   background-color: #666;
+  background-image: url("texturedbg.png");
   color: #111;
   font-family: "myriad-pro-semi-condensed", Helvetica, Arial, sans-serif;
   font-size: 100%;
