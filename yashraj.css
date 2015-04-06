@@ -55,6 +55,7 @@ table td, table th {
   font-size: 85%; }
 
 svg {
+  margin: 0 10px 0;
   background-color: #e9ecf3; }
 
 path {
