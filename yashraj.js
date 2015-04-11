@@ -130,7 +130,7 @@
   function drawBoxOfficeChart(data, chartKey, chartName) {
 
     var margin = {top: 30, right: 20, bottom: 30, left: 100};
-    var width = 600 - margin.left - margin.right;
+    var width = 620 - margin.left - margin.right;
     // var width = parseInt(d3.select('#charts').style('width'), 10) - margin.left - margin.right;
     var height = 300 - margin.top - margin.bottom;
 
