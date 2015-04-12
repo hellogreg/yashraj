@@ -129,10 +129,10 @@
 
   function drawBoxOfficeChart(data, chartKey, chartName) {
 
-    var margin = {top: 30, right: 20, bottom: 30, left: 100};
-    var width = 620 - margin.left - margin.right;
+    var margin = {top: 30, right: 65, bottom: 30, left: 80};
+    var width = 640 - margin.left - margin.right;
     // var width = parseInt(d3.select('#charts').style('width'), 10) - margin.left - margin.right;
-    var height = 300 - margin.top - margin.bottom;
+    var height = 240 - margin.top - margin.bottom;
 
     var x = d3.time.scale().range([0, width]);
     var y = d3.scale.linear().range([height, 0]);
@@ -179,19 +179,43 @@
         .data(data)
         .enter()
         .append("circle")
-        .attr("r", "3")
+        .attr("r", "4")
         .attr("cx", function (d) {
           return x(d.releaseDate);
         })
         .attr("cy", function (d) {
           return y(d[chartKey]);
         })
-        .append("title")
-        .text(function(d) {
-          return d.title;
+        .on("mouseover", function (d) {
+
+          svg.append("rect")
+              .attr("id", "tooltip-rect")
+              .attr("fill", "#fff")
+              .attr("stroke", "#7386b2")
+              .attr("x", parseFloat(d3.select(this).attr("cx")) - 60)
+              .attr("width", 120)
+              .attr("y", parseFloat(d3.select(this).attr("cy")) - 26)
+              .attr("height", 20);
+
+          svg.append("text")
+              .attr("id", "tooltip")
+              .attr("x", parseFloat(d3.select(this).attr("cx")))
+              .attr("y", parseFloat(d3.select(this).attr("cy")) - 12)
+              .attr("text-anchor", "middle")
+              .attr("font-size", "11px")
+              .attr("font-weight", "700")
+              .attr("fill", "#444")
+              .text(d.title);
+
         })
-        .on("mouseover", function(d) {
-          log("Movie: " + d.title);
+        .on("mouseout", function () {
+
+          d3.select("#tooltip")
+              .remove();
+
+          d3.select("#tooltip-rect")
+              .remove();
+
         });
 
     svg.append("g")
@@ -289,6 +313,15 @@
         return new MovieList(movies);
       },
 
+      filterOutDhoom3: function () {
+        var movies = this.getMovies();
+        movies = movies.filter(function (m) {
+          return !(m.imdbId === "tt1833673");
+        });
+        dir(movies);
+        return new MovieList(movies);
+      },
+
       sortByReleaseDate: function (isDescending) {
         var movies = this.getMovies();
         sortArrayByKey(movies, "releaseDate", isDescending);
@@ -311,16 +344,21 @@
 
       log("Drawing a data table.");
       drawDataTable(yrMovieData, {
-        "id": ["title", "totalGross", "maxTheaters", "releaseDate"],
-        "display": ["Movie Title", "Total Gross", "Max # of Theaters", "Release Date"]
+        "id": ["title", "totalGross", "maxTheaters", "openingAverage", "releaseDate"],
+        "display": ["Movie Title", "Total Gross", "Max Theaters", "Opening Average", "Release Date"]
       });
 
       log("Drawing data charts.");
-      drawBoxOfficeChart(yrMovieData, "totalGross", "Total US Gross");
-      drawBoxOfficeChart(yrMovieData, "maxTheaters", "Highest # of Theaters in Any One Week");
+      drawBoxOfficeChart(yrMovieData, "totalGross", "Total US Gross For Each Movie ($US)");
+      drawBoxOfficeChart(yrMovieData, "maxTheaters", "Highest # of Theaters In Which Each Movie Showed");
       drawBoxOfficeChart(yrMovieData, "performanceRating", "Simple Performance Rating (Total Gross / Max Theaters)");
-      drawBoxOfficeChart(yrMovieData, "openingAverage", "Opening Weekend Average $ per Theater");
+      drawBoxOfficeChart(yrMovieData, "openingAverage", "Opening Weekend Per-Theater Average For Each Movie ($US)");
       drawBoxOfficeChart(yrMovieData, "openingGrossAsPercentOfTotal", "Opening Gross as a Percentage of Total Gross");
+
+      var yrNoDhoom3 = yrMovieList.filterByHasFinancialData().filterOutDhoom3().sortByReleaseDate().getMovies();
+      drawBoxOfficeChart(yrNoDhoom3, "totalGross", "Total US Grosses, Not Counting Dhoom 3 ($US)");
+      drawBoxOfficeChart(yrNoDhoom3, "openingAverage", "Opening Weekend Averages, Not Counting Dhoom 3 ($US)");
+
 
     });
 
