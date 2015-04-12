@@ -336,13 +336,14 @@
     // Fetch the data and start processing it.
     fetchCsvData(csvUrl, function (data) {
 
-      var yrMovieList, yrMovieData;
+      var yrMovieList, yrMovieData, yrNoDhoom3;
 
       log("Mapping raw data to Movie objects.");
       yrMovieList = new MovieList(data);
 
       log("Filtering and sorting data, only including movies with financial data.");
       yrMovieData = yrMovieList.filterByHasFinancialData().sortByReleaseDate().getMovies();
+      yrNoDhoom3 = yrMovieList.filterByHasFinancialData().filterOutDhoom3().sortByReleaseDate().getMovies();
 
       log("Drawing a data table.");
       drawDataTable(yrMovieData, {
@@ -357,10 +358,8 @@
       drawBoxOfficeChart(yrMovieData, "openingAverage", "Opening Weekend Per-Theater Average For Each Movie ($US)");
       drawBoxOfficeChart(yrMovieData, "openingGrossAsPercentOfTotal", "Opening Gross as a Percentage of Total Gross");
 
-      var yrNoDhoom3 = yrMovieList.filterByHasFinancialData().filterOutDhoom3().sortByReleaseDate().getMovies();
       drawBoxOfficeChart(yrNoDhoom3, "totalGross", "Total US Grosses, Not Counting Dhoom 3 ($US)");
       drawBoxOfficeChart(yrNoDhoom3, "openingAverage", "Opening Weekend Averages, Not Counting Dhoom 3 ($US)");
-
 
     });
 
