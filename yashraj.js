@@ -1,3 +1,5 @@
+/* Yash Raj Box Office Charts, by Greg and Kathy Gibson of accessbollywood.com */
+
 (function () {
 
   "use strict";
