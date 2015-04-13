@@ -268,7 +268,7 @@
   // INIT FUNCTION
   (function () {
 
-    var csvUrl = "yashraj.csv";
+    var csvUrl = "yashraj.csv";//"https://dl.dropboxusercontent.com/u/6445565/yashraj.csv";//
 
     function Movie(m) {
       this.title = m.title || null;

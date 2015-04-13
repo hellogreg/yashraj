@@ -38,7 +38,8 @@ h1, h2, h3, h4, h5, h6 {
 .container {
   padding: 10px 20px;
   margin: auto;
-  background-color: #fff; }
+  background-color: #fff;
+  min-width: 720px; }
 
 table {
   border: 2px solid #e9ecf3;
