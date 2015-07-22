@@ -237,7 +237,7 @@
         .text(chartName);
 
     // Derive a linear regression
-    linReg = ss.linearRegression().data(data.map(function (d) {
+    linReg = ss.linear_regression().data(data.map(function (d) {
       return [+d.releaseDate, +d[chartKey]];
     })).line();
 
