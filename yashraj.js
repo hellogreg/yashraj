@@ -270,6 +270,7 @@
 
     var csvUrl = "yashraj.csv";//"https://dl.dropboxusercontent.com/u/6445565/yashraj.csv";//
 
+
     var Movie = (function() {
 
       function Movie(m) {
@@ -293,49 +294,43 @@
     })();
 
 
+    var MovieList = (function() {
+      function MovieList(movies) {
+        var movieList = movies.map(function (m) {
+              return new Movie(m);
+            }) || [];
 
+        this.getMovies = function () {
+          return movieList;
+        };
+      }
 
-
-
-    function MovieList(movies) {
-
-      var movieList = movies.map(function (m) {
-            return new Movie(m);
-          }) || [];
-
-      this.getMovies = function () {
-        return movieList;
-      };
-
-    }
-
-    MovieList.prototype = {
-
-      filterByHasFinancialData: function () {
+      MovieList.prototype.filterByHasFinancialData = function () {
         var movies = this.getMovies();
         movies = movies.filter(function (m) {
           return (m.hasFinancialData());
         });
         dir(movies);
         return new MovieList(movies);
-      },
+      };
 
-      filterOutDhoom3: function () {
+      MovieList.prototype.filterOutDhoom3 = function () {
         var movies = this.getMovies();
         movies = movies.filter(function (m) {
           return !(m.imdbId === "tt1833673");
         });
         dir(movies);
         return new MovieList(movies);
-      },
+      };
 
-      sortByReleaseDate: function (isDescending) {
+      MovieList.prototype.sortByReleaseDate = function (isDescending) {
         var movies = this.getMovies();
         sortArrayByKey(movies, "releaseDate", isDescending);
         return this;
-      }
+      };
 
-    };
+      return MovieList;
+    })();
 
 
     // Fetch the data and start processing it.
