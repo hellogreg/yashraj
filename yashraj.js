@@ -270,26 +270,31 @@
 
     var csvUrl = "yashraj.csv";//"https://dl.dropboxusercontent.com/u/6445565/yashraj.csv";//
 
-    function Movie(m) {
-      this.title = m.title || null;
-      this.totalGross = isWholeNumber(m.totalGross) ? +m.totalGross : null;
-      this.releaseDate = (m.releaseDate) ? convertStringToDate(m.releaseDate) : null;
-      this.openingGross = m.openingGross || +m.g1 || null;
-      this.openingTheaters = m.openingTheaters || +m.t1 || null;
-      this.maxTheaters = m.maxTheaters || +m.maxT || null;
-      this.imdbId = m.imdbId || m.imdbid || null;
-      this.performanceRating = Math.round(this.totalGross / this.maxTheaters) || null;
-      this.openingAverage = Math.round(this.openingGross / this.openingTheaters) || null;
-      this.openingGrossAsPercentOfTotal = Math.round(this.openingGross / this.totalGross * 100) || null;
-    }
+    var Movie = (function() {
 
-    Movie.prototype = {
-
-      hasFinancialData: function () {
-        return isWholeNumber(this.totalGross);
+      function Movie(m) {
+        this.title = m.title || null;
+        this.totalGross = isWholeNumber(m.totalGross) ? +m.totalGross : null;
+        this.releaseDate = (m.releaseDate) ? convertStringToDate(m.releaseDate) : null;
+        this.openingGross = m.openingGross || +m.g1 || null;
+        this.openingTheaters = m.openingTheaters || +m.t1 || null;
+        this.maxTheaters = m.maxTheaters || +m.maxT || null;
+        this.imdbId = m.imdbId || m.imdbid || null;
+        this.performanceRating = Math.round(this.totalGross / this.maxTheaters) || null;
+        this.openingAverage = Math.round(this.openingGross / this.openingTheaters) || null;
+        this.openingGrossAsPercentOfTotal = Math.round(this.openingGross / this.totalGross * 100) || null;
       }
 
-    };
+      Movie.prototype.hasFinancialData = function() {
+        return isWholeNumber(this.totalGross);
+      };
+
+      return Movie;
+    })();
+
+
+
+
 
 
     function MovieList(movies) {
