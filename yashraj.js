@@ -60,13 +60,14 @@
     return "$" + this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, "g"), "$&,");
   };
 
-  function isValidDate(d) {
-    return (Object.prototype.toString.call(d) === "[object Date]");
-  }
 
   function convertStringToDate(d) {
 
     var dateArray, year, month, day, date;
+
+    function isValidDate(d) {
+      return (Object.prototype.toString.call(d) === "[object Date]");
+    }
 
     // Only convert if it's not already a valid date object!
     if (!isValidDate(d)) {
