@@ -295,6 +295,7 @@
 
 
     var MovieList = (function() {
+
       function MovieList(movies) {
         var movieList = movies.map(function (m) {
               return new Movie(m);
